@@ -1,0 +1,8 @@
+# Ignore data files 
+data/ 
+outputs/ 
+__pycache__/ 
+*.pyc 
+.venv/ 
+.vscode/ 
+.env 
