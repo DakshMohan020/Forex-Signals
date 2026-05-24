@@ -23,7 +23,7 @@ DATA_DIR = Path("data")
 TICKERS = {
     "GBPUSD": "GBPUSD=X",
     "USDJPY": "USDJPY=X",
-    # "EURUSD": "EURUSD=X",
+    "EURUSD": "EURUSD=X",
     # "AUDUSD": "AUDUSD=X",
 }
 

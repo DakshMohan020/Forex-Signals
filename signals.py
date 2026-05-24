@@ -21,7 +21,7 @@ PAIRS = {
     "GBPUSD": {"file": DATA_DIR / "GBPUSDh4.csv", "divisor": 1.0},
     "USDJPY": {"file": DATA_DIR / "USDJPYh4.csv", "divisor": 1.0},
     # Add more pairs here:
-    # "EURUSD": {"file": DATA_DIR / "EURUSDh4.csv", "divisor": 1.0},
+    "EURUSD": {"file": DATA_DIR / "EURUSDh4.csv", "divisor": 1.0},
     # "AUDUSD": {"file": DATA_DIR / "AUDUSDh4.csv", "divisor": 1.0},
 }
 
