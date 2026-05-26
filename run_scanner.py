@@ -17,6 +17,7 @@ GOOGLE SHEETS INTEGRATION:
 
 import argparse
 import json
+import os
 import smtplib
 import time
 import urllib.request
@@ -25,32 +26,39 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 # ── Local modules ─────────────────────────────────────────────────────────────
 from fetch_data import fetch_all
 from signals    import check_signals, print_signal, PAIRS
 
-# ── Notification config — edit these ──────────────────────────────────────────
+# ── Notification config — loaded from .env ───────────────────────────────────
 # All notification methods are optional. Set ENABLE_* to True to activate.
 
 # Google Sheets Webhook (highly recommended for auto-logging)
 # Steps to set up:
 # 1. Create a Google Apps Script webhook (see AUTOMATION_GUIDE.md)
-# 2. Copy the deployment URL below
+# 2. Add to .env: GOOGLE_SHEETS_WEBHOOK_URL=your_url_here
 ENABLE_GOOGLE_SHEETS = True  # Set to True once you create the webhook
-GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzsiMKJUMrPuu0S3wtRTotjLmsZDFJbFc28gc-Z6HgC_oB_UQ1QXc9K4fmlyeLo4HZr/exec"
+GOOGLE_SHEETS_WEBHOOK_URL = os.getenv("GOOGLE_SHEETS_WEBHOOK_URL", "")
 
 # Email (Gmail recommended — use an App Password, not your main password)
+# Add to .env: EMAIL_PASSWORD=your_app_password_here
 ENABLE_EMAIL    = True
 EMAIL_FROM      = "dakshmohan180@gmail.com"
-EMAIL_PASSWORD  = "rvan zjnt uipp htsr"   # Gmail App Password
+EMAIL_PASSWORD  = os.getenv("EMAIL_PASSWORD", "")   # From .env
 EMAIL_TO        = ["dakshmohan180@gmail.com"]   # can be multiple recipients
 EMAIL_SMTP_HOST = "smtp.gmail.com"
 EMAIL_SMTP_PORT = 587
 
 # Telegram (create a bot via @BotFather, then get your chat ID)
+# Add to .env: TELEGRAM_TOKEN=your_token and TELEGRAM_CHAT_ID=your_chat_id
 ENABLE_TELEGRAM = False
-TELEGRAM_TOKEN  = "your_bot_token_here"      # from @BotFather
-TELEGRAM_CHAT_ID= "your_chat_id_here"        # from @userinfobot
+TELEGRAM_TOKEN  = os.getenv("TELEGRAM_TOKEN", "your_bot_token_here")      # from @BotFather
+TELEGRAM_CHAT_ID= os.getenv("TELEGRAM_CHAT_ID", "your_chat_id_here")        # from @userinfobot
 
 # Signal log file (backup to JSON)
 SIGNAL_LOG      = Path("outputs/signal_log.json")
